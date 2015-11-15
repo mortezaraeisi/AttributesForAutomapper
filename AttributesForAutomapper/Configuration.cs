@@ -25,9 +25,7 @@ namespace AttributesForAutomapper
             {
                 AutoMapper.Mapper.CreateMap(map.SourceType, map.Destination)
                     
-                    .DoMapForPropertyAttribute() // it must be the first
-
-                    .DoMapForPropertyAttribute() // for different property names in source and destination
+                    .DoMapForMemberAttribute() // for different property names in source and destination
 
                     .DoIgnoreAttribute()// ignore specified properties
 

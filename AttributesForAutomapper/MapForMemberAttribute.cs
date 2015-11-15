@@ -5,11 +5,11 @@ namespace AttributesForAutomapper
     [AttributeUsage(AttributeTargets.Property)]
     public class MapForMemberAttribute : Attribute
     {
-        public string PropertyToMap { get; private set; }
+        public string MemberToMap { get; private set; }
 
-        public MapForMemberAttribute(string propertyToMap)
+        public MapForMemberAttribute(string memberToMap)
         {
-            PropertyToMap = propertyToMap;
+            MemberToMap = memberToMap;
         }
     };
 }

@@ -32,7 +32,7 @@ namespace AttributesForAutomapper
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
-        public static IMappingExpression DoMapForPropertyAttribute(this IMappingExpression expression)
+        public static IMappingExpression DoMapForMemberAttribute(this IMappingExpression expression)
         {
             var ok =
                 from p in expression.TypeMap.DestinationType.GetProperties()
@@ -43,7 +43,7 @@ namespace AttributesForAutomapper
              foreach (var property in ok)
              {
                  expression.ForMember(property.PropertyName, 
-                     opt => opt.MapFrom(property.AttributeValue.PropertyToMap));
+                     opt => opt.MapFrom(property.AttributeValue.MemberToMap));
              }
             return expression;
         }

@@ -19,7 +19,6 @@ namespace AttributesForAutomapper.ConsoleApp
         {
             var assemblyToLoad = Assembly.GetAssembly(typeof (AdminStudentViewModel));//get assembly
             global::AttributesForAutomapper.Configuration.Initialize(assemblyToLoad);//init automaper
-
             IList<Student> lst;
             using (var context = new MySampleContext())
             {
@@ -27,10 +26,14 @@ namespace AttributesForAutomapper.ConsoleApp
                 foreach (var student in lst)
                 {
                     WriteLine(
-                        $"{student.Id}- {student.Name} {student.Family}. mailto:{student.Email}. Registered at'{student.RegisterDateTime}'");
+                        $"[{student.Id}]******************************\n" +
+                        $"{student.Name} {student.Family}.\n" +
+                        $"mailto:{student.Email}.\n" +
+                        $"Registered at'{student.RegisterDateTime}'");
+                    foreach (var book in student.Books)
+                        WriteLine($"\tBook name:{book.Name}, Book price:{book.Price}");
                 }
             }
-
             var lstViewModel = AutoMapper.Mapper.Map<IList<Student>, IList<AdminStudentViewModel>>(lst);
             foreach (var adminStudentViewModel in lstViewModel)
             {
@@ -40,7 +43,6 @@ namespace AttributesForAutomapper.ConsoleApp
                     $"mailto:{adminStudentViewModel.Email}.\n\t" +
                     $"Registered at'{adminStudentViewModel.RegisterDateTimePersian}'\n\t" +
                     $"Book Counts: {adminStudentViewModel.BookCounts} with total price of {adminStudentViewModel.BookPrice}");
-
             }
             WriteLine("Press any key to exit...");
             ReadKey();
