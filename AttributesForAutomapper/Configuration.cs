@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using AttributesForAutomapper.Convertors;
+using AutoMapper;
 
 namespace AttributesForAutomapper
 {
@@ -13,7 +11,7 @@ namespace AttributesForAutomapper
         public static void Initialize(Assembly assembly)
         {
             //register global convertors.
-            AutoMapper.Mapper.CreateMap<DateTime, string>().ConvertUsing<DateTimeToPersianDateTimeConverter>();
+            Mapper.CreateMap<DateTime, string>().ConvertUsing<DateTimeToPersianDateTimeConverter>();
 
 
             var typesToMap = from t in assembly.GetTypes()
@@ -23,11 +21,11 @@ namespace AttributesForAutomapper
 
             foreach (var map in typesToMap)
             {
-                AutoMapper.Mapper.CreateMap(map.SourceType, map.Destination)
+                Mapper.CreateMap(map.SourceType, map.Destination)
                     
                     .DoMapForMemberAttribute() // for different property names in source and destination
 
-                    .DoIgnoreAttribute()// ignore specified properties
+                    .DoIgnoreMapAttribute()// ignore specified properties
 
                     .DoUseValueResolverAttribute()// set value resolvers
 
@@ -36,7 +34,7 @@ namespace AttributesForAutomapper
 
             } //endeach
 
-            AutoMapper.Mapper.AssertConfigurationIsValid();
+            Mapper.AssertConfigurationIsValid();
         }
     };
 }

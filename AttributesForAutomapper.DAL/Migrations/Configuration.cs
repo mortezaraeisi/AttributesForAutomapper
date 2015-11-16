@@ -1,20 +1,17 @@
+using System;
+using System.Data.Entity.Migrations;
 using AttributesForAutomapper.Domain;
 
 namespace AttributesForAutomapper.DAL.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<AttributesForAutomapper.DAL.MySampleContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<MySampleContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(AttributesForAutomapper.DAL.MySampleContext context)
+        protected override void Seed(MySampleContext context)
         {
             var mine = new Student
             {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using AttributesForAutomapper.Domain;
 using AutoMapper;
 
@@ -20,6 +16,7 @@ namespace AttributesForAutomapper.ViewModels
         [MapForMember("Family")]
         public string LastName { set; get; }
 
+        [IgnoreMap]
         public string Email { set; get; }
 
         [MapForMember("RegisterDateTime")]
@@ -29,26 +26,17 @@ namespace AttributesForAutomapper.ViewModels
         public int BookCounts { set; get; }
 
         [UseValueResolver(typeof (BookPriceValueResolver))]
-        public decimal BookPrice { set; get; }
+        public decimal TotalBookPrice { set; get; }
     }
 
 
     public class BookCountValueResolver : ValueResolver<Student, int>
     {
-        protected override int ResolveCore(Student source)
-        {
-            return source.Books.Count;
-        }
-    }
+        protected override int ResolveCore(Student source) => source.Books.Count;
+    };
+
     public class BookPriceValueResolver : ValueResolver<Student, decimal>
     {
-        protected override decimal ResolveCore(Student source)
-        {
-            return source.Books.Sum(b => b.Price);
-            //instead of
-            //var ok = 0M;
-           // foreach (var b in source.Books) ok += b.Price;
-           // return ok;
-        }
-    }
+        protected override decimal ResolveCore(Student source) => source.Books.Sum(b => b.Price);
+    };
 }

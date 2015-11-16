@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 
 namespace AttributesForAutomapper
@@ -15,7 +11,7 @@ namespace AttributesForAutomapper
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
-        public static IMappingExpression DoIgnoreAttribute(this IMappingExpression expression)
+        public static IMappingExpression DoIgnoreMapAttribute(this IMappingExpression expression)
         {
             foreach (var property in
                 expression.TypeMap.DestinationType.GetProperties()
